@@ -23,6 +23,7 @@ char pop()
 {
     Node *p;
     char x = -1;
+
     if (Top == NULL)
     {
         cout << "Stack is empty." << endl;
@@ -52,6 +53,8 @@ void display()
 int peek(int pos)
 {
     int i;
+    if (pos < 1)
+        return -1;
     Node *p = Top;
     for (i = 0; p != NULL && i < pos - 1; i++)
     {
