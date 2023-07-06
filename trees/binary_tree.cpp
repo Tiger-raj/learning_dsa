@@ -1,64 +1,81 @@
 #include <bits/stdc++.h>
+#include "queue.h"
 using namespace std;
 
-struct Node
-{
-    struct Node *lchild;
-    int data;
-    struct Node *rchild;
-} *root = NULL;
+struct Node *root = NULL;
 
-struct Queue
+void create()
 {
-    int size;
-    int front;
-    int rear;
-    Node **Q;
-};
+    struct Node *p, *t;
+    int x;
+    struct Queue q;
+    create(&q, 100);
 
-void create(Queue *q, int size)
-{
-    q->size = size;
-    q->front = q->rear = 0;
-    q->Q = new Node *[q->size];
+    printf("Enter root value :");
+    scanf("%d", &x);
+    root = new Node;
+    root->data = x;
+    root->lchild = root->rchild = NULL;
+    enqueue(&q, root);
+
+    while (!isEmpty(q))
+    {
+        p = dequeue(&q);
+        printf("Enter left child of %d", p->data);
+        scanf("%d", &x);
+        if (x != -1)
+        {
+            t = new Node;
+            t->data = x;
+            t->lchild = t->rchild = NULL;
+            p->lchild = t;
+            enqueue(&q, t);
+        }
+        printf("Enter right child of %d", p->data);
+        scanf("%d", &x);
+        if (x != -1)
+        {
+            t = new Node;
+            t->data = x;
+            t->lchild = t->rchild = NULL;
+            p->rchild = t;
+            enqueue(&q, t);
+        }
+    }
 }
 
-void enqueue(Queue *q, Node *x)
+void inorder(Node *p)
 {
-    if ((q->rear + 1) % q->size == q->front)
+    if (p)
     {
-        cout << "Queue is full\n";
-    }
-    else
-    {
-        q->rear = (q->rear + 1) % q->size;
-        q->Q[q->rear] = x;
+        inorder(p->lchild);
+        printf("%d", p->data);
+        inorder(p->rchild);
     }
 }
-
-Node *dequeue(Queue *q)
+void preorder(Node *p)
 {
-    Node *x = NULL;
-    if (q->front == q->rear)
+    if (p)
     {
-        cout << "Queue is empty\n";
+        printf("%d", p->data);
+        preorder(p->lchild);
+        preorder(p->rchild);
     }
-    else
-    {
-        q->front = (q->front + 1) % q->size;
-        x = q->Q[q->front];
-    }
-    return x;
 }
-
-int isEmpty(struct Queue q)
+void postorder(Node *p)
 {
-    return q.front == q.rear;
+    if (p)
+    {
+        postorder(p->lchild);
+        postorder(p->rchild);
+        printf("%d", p->data);
+    }
 }
 
 int main()
 {
-    struct Queue q;
+    create();
+    preorder(root);
 
     return 0;
 }
