@@ -1,5 +1,6 @@
 #include <bits/stdc++.h>
 #include "queue.h"
+#include "stack.h"
 using namespace std;
 
 struct Node *root = NULL;
@@ -11,7 +12,7 @@ void create()
     struct Queue q;
     create(&q, 100);
 
-    printf("Enter root value :");
+    printf("Enter root value : ");
     scanf("%d", &x);
     root = new Node;
     root->data = x;
@@ -21,7 +22,7 @@ void create()
     while (!isEmpty(q))
     {
         p = dequeue(&q);
-        printf("Enter left child of %d", p->data);
+        printf("Enter left child of %d ", p->data);
         scanf("%d", &x);
         if (x != -1)
         {
@@ -31,7 +32,7 @@ void create()
             p->lchild = t;
             enqueue(&q, t);
         }
-        printf("Enter right child of %d", p->data);
+        printf("Enter right child of %d ", p->data);
         scanf("%d", &x);
         if (x != -1)
         {
@@ -72,10 +73,52 @@ void postorder(Node *p)
     }
 }
 
+void IPreorder(Node *p)
+{
+    Stack stk;
+    Stackcreate(&stk, 100);
+
+    while (p || !isEmptyStack(stk))
+    {
+        if (p)
+        {
+            printf("%d ", p->data);
+            push(&stk, p);
+            p = p->lchild;
+        }
+        else
+        {
+            p = pop(&stk);
+            p = p->rchild;
+        }
+    }
+}
+void IInorder(Node *p)
+{
+    Stack stk;
+    Stackcreate(&stk, 100);
+
+    while (p || !isEmptyStack(stk))
+    {
+        if (p)
+        {
+
+            push(&stk, p);
+            p = p->lchild;
+        }
+        else
+        {
+            p = pop(&stk);
+            printf("%d ", p->data);
+            p = p->rchild;
+        }
+    }
+}
+
 int main()
 {
     create();
-    preorder(root);
+    IInorder(root);
 
     return 0;
 }
