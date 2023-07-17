@@ -13,6 +13,7 @@ void printVec(vector<int> &v)
     }
     cout << "\n";
 }
+
 int main()
 {
     /*
