@@ -1,12 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-void swap(int *a, int *b)
-{
-    int t = *a;
-    *a = *b;
-    *b = t;
-}
 void selectionSort(int arr[], int n) //  T.C. : O(n^2) always , inplace sorting , stable sorting
 {
     int min, i, j;
@@ -20,7 +14,7 @@ void selectionSort(int arr[], int n) //  T.C. : O(n^2) always , inplace sorting 
                 min = j;
             }
         }
-        swap(&arr[min], &arr[i]);
+        swap(arr[min], arr[i]);
     }
 }
 void display(int arr[], int n)
