@@ -51,6 +51,7 @@ bool rabin_karp(string s, string t)
     }
     return false;
 }
+
 int main()
 {
 
