@@ -2,22 +2,28 @@
 using namespace std;
 typedef long long ll;
 
-int m = 1e9 + 9;
+ll m = 1e9 + 9;
 
 // calculate power in log(b) time
-ll power(ll a, ll b)
+ll power(ll base, ll power, ll m)
 {
-    if (b == 0)
-        return 1;
-    ll val = power(a, b / 2);
-    if (!b % 2)
+    base %= m;
+    ll res = 1;
+    while (power > 0)
     {
-        return (val % m * val % m) % m;
+        if (power & 1)
+        {
+            res = res * base % m;
+        }
+        base = (base * base) % m;
+        power >>= 1;
     }
-    else
-    {
-        return (val % m * val % m * a % m) % m;
-    }
+    return res;
+}
+
+ll modulo_inverse(ll base, ll mod)
+{
+    return power(base, mod - 2, mod);
 }
 
 // check if s string is substring of t or not, can be modified according to the use.
