@@ -3,30 +3,20 @@ using namespace std;
 
 void lps_fill(string str, vector<int> &lps)
 {
-    int n = str.length();
-    lps[0] = 0;
-    int len = 0;
-    int i = 1;
-    while (i < n)
+    int n = size(str);
+    for (int i = 1; i < n; i++)
     {
-        if (str[i] == str[len])
+        int k = lps[i - 1];
+
+        while (k > 0 && str[k] != str[i])
         {
-            len++;
-            lps[i] = len;
-            i++;
+            k = lps[k - 1];
         }
-        else
+        if (str[k] == str[i])
         {
-            if (len != 0)
-            {
-                len = lps[len - 1];
-            }
-            else
-            {
-                lps[i] = 0;
-                i++;
-            }
+            k++;
         }
+        lps[i] = k;
     }
     return;
 }

@@ -1,0 +1,1 @@
+{"name":"Local: code","url":"d:\\learning code\\cpp\\DSA\\code.cpp","tests":[{"id":1728143574610,"input":"2\n4\n1 2 3 4\n4\n1 1 2 2","output":"-1\n1"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\learning code\\cpp\\DSA\\code.cpp","group":"local","local":true}
